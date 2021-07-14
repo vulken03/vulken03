@@ -17,11 +17,11 @@ if(userToken){
                 message:'token is not valid'
             })
         }else{
-            req.user=data;
+            
 
             user_token.findOne({
                 where:{
-                    token:userToken,
+                    token:userToken,//uuid instead of token
                     user_id:req.user.id
                 }
             }).then((userverify)=>{
@@ -29,6 +29,8 @@ if(userToken){
                    if(userverify){
 
                     next();
+                    req.user=data;
+                    
                    }
                    else{
                        res.status(200).json({
